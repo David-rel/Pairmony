@@ -6,6 +6,7 @@ import 'tailwindcss/tailwind.css'
 
 
 export default function Home() {
+  //cool scroll fade away
   const [opacity, setOpacity] = useState(1)
 
   const handleScroll = () => {
@@ -51,6 +52,8 @@ export default function Home() {
   const authVisible = useIntersectionObserver(authRef, {})
   const weviateVisible = useIntersectionObserver(weviateRef, {})
 
+
+  //dynamic navigation system
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const mobileMenuRef = useRef(null)
 
@@ -71,9 +74,8 @@ export default function Home() {
     setMobileMenuOpen(!mobileMenuOpen)
   }
 
+  //cool startup animation with session storage
   const [isAnimationVisible, setIsAnimationVisible] = useState(true)
-
-
 
   useEffect(() => {
     // Move the state initialization inside this effect
@@ -232,6 +234,7 @@ export default function Home() {
             )}
           </nav>
 
+          {/* code for initial view of page startup */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
             <h1
               style={{ opacity: opacity }}

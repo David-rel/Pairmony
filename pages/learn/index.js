@@ -16,7 +16,7 @@ export default function About() {
           {/* First section */}
           <div className="flex flex-col md:flex-row items-center justify-center">
             <Image
-              src="/images/coffee.png"
+             // src="/images/coffee.png"
               alt="What is Pairmony?"
               width={400}
               height={400}
@@ -53,7 +53,7 @@ export default function About() {
               </button>
             </div>
             <Image
-              src="/images/coffee.png"
+            //  src="/images/coffee.png"
               alt="What does Pairmony mean?"
               width={400}
               height={400}
@@ -64,7 +64,7 @@ export default function About() {
           {/* Third section */}
           <div className="flex flex-col md:flex-row items-center justify-center">
             <Image
-              src="/images/coffee.png"
+             // src="/images/coffee.png"
               alt="How Pairmony works"
               width={400}
               height={400}
@@ -101,7 +101,7 @@ export default function About() {
               </button>
             </div>
             <Image
-              src="/images/coffee.png"
+             // src="/images/coffee.png"
               alt="Our advanced AI algorithms"
               width={400}
               height={400}

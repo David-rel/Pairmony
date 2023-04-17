@@ -6,20 +6,21 @@ import HobbyCard from '../../components/hobbyCard'
 import Image from 'next/image'
 import Footer from '../../components/footer'
 import Navbar from '../../components/navbar'
+import Link from 'next/link'
 
 const hobbies = [
   {
-    title: 'Photography',
+    title: 'Soccer',
     imageSrc: '/images/photography.jpg',
-    description: 'Capturing moments and memories through my lens.',
+    description: 'love watching soccer and playing the worlds game.',
   },
   {
-    title: 'Hiking',
+    title: 'Mentoring',
     imageSrc: '/images/hiking.jpg',
-    description: 'Exploring nature and challenging my limits.',
+    description: 'teaching and coaching kids in my passions.',
   },
   {
-    title: 'Cooking',
+    title: 'cooking',
     imageSrc: '/images/cooking.jpg',
     description: 'Creating culinary masterpieces and trying new recipes.',
   },
@@ -27,34 +28,34 @@ const hobbies = [
 
 const timelineData = [
   {
-    year: '2015',
+    year: '2020',
+    title: 'Started Learning basic coding learning',
+    description: 'Began learning Java and Python',
+  },
+  {
+    year: '2021',
     title: 'Started Learning Web Development',
     description: 'Began learning HTML, CSS, and JavaScript.',
   },
   {
-    year: '2015',
-    title: 'Started Learning Web Development',
-    description: 'Began learning HTML, CSS, and JavaScript.',
+    year: '2022',
+    title: 'Started creating actual website projects',
+    description: 'Using next.js, node, and tailwind css',
   },
   {
-    year: '2015',
-    title: 'Started Learning Web Development',
-    description: 'Began learning HTML, CSS, and JavaScript.',
+    year: '2022',
+    title: 'Built Chirp a twitter clone and got a lot people on it',
+    description: 'The first ever project ever created that actually did well',
   },
   {
-    year: '2015',
-    title: 'Started Learning Web Development',
-    description: 'Began learning HTML, CSS, and JavaScript.',
+    year: '2023',
+    title: 'Learning AI and machine learning',
+    description: 'Learning about LangChain and Vector Databases',
   },
   {
-    year: '2015',
-    title: 'Started Learning Web Development',
-    description: 'Began learning HTML, CSS, and JavaScript.',
-  },
-  {
-    year: '2015',
-    title: 'Started Learning Web Development',
-    description: 'Began learning HTML, CSS, and JavaScript.',
+    year: '2023',
+    title: 'Starting a website that uses AI and vector databases',
+    description: 'Began building a full stack application using AI',
   },
   // Add more items here
 ]
@@ -62,9 +63,14 @@ const timelineData = [
 const skills = [
   { name: 'HTML', percentage: 90 },
   { name: 'CSS', percentage: 80 },
-  { name: 'JavaScript', percentage: 75 },
-  { name: 'React', percentage: 70 },
-  { name: 'Node.js', percentage: 60 },
+  { name: 'JavaScript', percentage: 90 },
+  { name: 'React', percentage: 90 },
+  { name: 'Node.js', percentage: 100 },
+  { name: 'Next.js', percentage: 90 },
+  { name: 'Supabase', percentage: 90 },
+  { name: 'Postgres', percentage: 70 },
+  { name: 'SQL', percentage: 50 },
+  { name: 'Lang Chain', percentage: 30 },
 ]
 
 function About() {
@@ -81,8 +87,8 @@ function About() {
           className="bg-hero-image absolute inset-0 w-full h-full object-cover opacity-0 bg-gray-500"
         />
         <div className="hero-text z-10 opacity-0">
-          <h1 className="text-5xl font-bold">Hello, I am John Doe</h1>
-          <h2 className="text-2xl mt-4">I am a Web Developer & Designer</h2>
+          <h1 className="text-5xl font-bold">Hello, I am David Fales</h1>
+          <h2 className="text-2xl mt-4">I am a Full Stack Developer</h2>
           <button className="mt-8 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
             Contact Me
           </button>
@@ -102,26 +108,30 @@ function About() {
         <div className="w-full md:w-1/2 md:pl-8 text-justify">
           <h2 className="text-xl font-semibold mb-4">About Me</h2>
           <p>
-            Hey there, I am John Doe! I created this website to share my
-            passion for coding and my journey to becoming a developer. Ever
-            since I was a child, I have always been fascinated by technology
-            and how it shapes our world.
+            Hey there, I am David Fales! I created this website to share my passion
+            for coding and my journey to becoming a developer. I wanted to create this website to showcase my AI and full stack ability. 
+            I love to code and I love to create. Coding is my life and my passion.
           </p>
           <p className="mt-4">
             I started coding in high school and quickly fell in love with the
-            creative problem-solving process it entails. Since then, I have
-            been dedicated to learning new languages, frameworks, and techniques
-            to create meaningful and innovative projects. This website serves as
-            a platform for me to share my experiences, knowledge, and passion
-            with others.
+            creative problem-solving process it entails. Since then, I have been
+            dedicated to learning new languages, frameworks, and techniques to
+            create meaningful and innovative projects. This website serves as a
+            platform for me to share my experiences, knowledge, and passion with
+            others.
           </p>
           <p className="mt-4">
-            In my free time, I enjoy hiking, reading, and exploring new
-            cuisines. I am always eager to learn and grow, both as a
-            developer and a person. I believe that coding has the power to
-            transform lives and create a better future for all. Thank you for
-            joining me on this journey!
+            I work at the robotics club, Programming club and AI club at my school, I am also in NHS and the student leadership team at my school as well. I am always eager to learn and grow, both as a developer
+            and a person. I believe that coding has the power to transform lives
+            and create a better future for all. Thank you for joining me on this
+            journey!
           </p>
+          <br />
+          <Link href="/support">
+            <button className="bg-red-500 text-white px-4 py-2 rounded mt-4">
+              Contact Me
+            </button>
+          </Link>
         </div>
       </div>
 
