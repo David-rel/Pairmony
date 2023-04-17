@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInImage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.hero-text {
+  animation: fadeIn 2s ease-in-out forwards;
+  animation-delay: 1s;
+}
+
+.bg-hero-image {
+  animation: fadeInImage 1.5s ease-in-out forwards;
+  animation-delay: 1.5s;
+}
+
+
+
+.timeline {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #FF0000;
+}
+
+.timeline-point {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  background-color: #FF0000;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.timeline-point-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.timeline-content {
+  position: absolute;
+  top: 40px; /* Change from -40px to 40px */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000000; /* Change to black */
+  color: #FFFFFF; /* Add this line for white text */
+  border-radius: 4px;
+  padding: 8px;
+  width: 250px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  z-index: 10; /* Add z-index */
+}
+
+.timeline-point:hover ~ .timeline-content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+.animate-heart-scale {
+  animation: heart-scale 2s ease-in-out forwards;
+}
+
+@keyframes heart-scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
