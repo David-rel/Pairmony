@@ -89,9 +89,11 @@ function About() {
         <div className="hero-text z-10 opacity-0">
           <h1 className="text-5xl font-bold">Hello, I am David Fales</h1>
           <h2 className="text-2xl mt-4">I am a Full Stack Developer</h2>
+          <Link href="/support">
           <button className="mt-8 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
             Contact Me
           </button>
+          </Link>
         </div>
       </div>
 
