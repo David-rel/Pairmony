@@ -3,10 +3,29 @@ import useIntersectionObserver from '../utils/useIntersectionObserver'
 import Link from 'next/link'
 import Footer from '../components/footer'
 import 'tailwindcss/tailwind.css'
+import {
+  useLogoutFunction,
+  useRedirectFunctions,
+  withAuthInfo,
+} from '@propelauth/react'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 
-export default function Home() {
+const Home = withAuthInfo((props) => {
+    const { redirectToLoginPage, redirectToSignupPage, redirectToAccountPage } =
+      useRedirectFunctions()
+    const logoutFunction = useLogoutFunction()
+
+    const router = useRouter()
+
+    if(props.isLoggedIn) {
+      router.push('app')
+    }
+
   //cool scroll fade away
+
+  
   const [opacity, setOpacity] = useState(1)
 
   const handleScroll = () => {
@@ -25,32 +44,6 @@ export default function Home() {
     }
   }, [])
 
-  const nextjsRef = useRef(null)
-  const tailwindcssRef = useRef(null)
-  const vercelRef = useRef(null)
-  const supabaseRef = useRef(null)
-  const herokuRef = useRef(null)
-  const weviateRef = useRef(null)
-  const PostgreSQLRef = useRef(null)
-  const imageRef = useRef(null)
-  const textRef = useRef(null)
-  const GitHubRef = useRef(null)
-  const CoffeeRef = useRef(null)
-  const authRef = useRef(null)
-
-  // Add useIntersectionObserver hooks for each element
-  const nextjsVisible = useIntersectionObserver(nextjsRef, {})
-  const tailwindcssVisible = useIntersectionObserver(tailwindcssRef, {})
-  const vercelVisible = useIntersectionObserver(vercelRef, {})
-  const supabaseVisible = useIntersectionObserver(supabaseRef, {})
-  const herokuVisible = useIntersectionObserver(herokuRef, {})
-  const PostgresSQLVisible = useIntersectionObserver(PostgreSQLRef, {})
-  const imageVisible = useIntersectionObserver(imageRef, {})
-  const textVisible = useIntersectionObserver(textRef, {})
-  const GitHubVisible = useIntersectionObserver(GitHubRef, {})
-  const CoffeeVisible = useIntersectionObserver(CoffeeRef, {})
-  const authVisible = useIntersectionObserver(authRef, {})
-  const weviateVisible = useIntersectionObserver(weviateRef, {})
 
 
   //dynamic navigation system
@@ -130,10 +123,10 @@ export default function Home() {
                 <ul className="hidden sm:flex items-center space-x-6 text-black text-xl">
                   <li>
                     <Link
-                      href="/learn"
+                      href="/Tech"
                       className="hover:text-red-500 hover:underline"
                     >
-                      Learn
+                      Technology Used
                     </Link>
                   </li>
                   <li>
@@ -162,17 +155,20 @@ export default function Home() {
                   </li>
                 </ul>
               </div>
-              <Link href="/login" className="hidden sm:inline-flex">
-                <button className="bg-gradient-to-r from-red-500 to-pink-200 text-black font-bold px-8 py-2 text-lg rounded-full hover:bg-gradient-to-r hover:from-red-400 hover:to-pink-100">
+
+              <button
+                onClick={redirectToLoginPage}
+                className="bg-gradient-to-r from-red-500 to-pink-200 text-black font-bold px-8 py-2 text-lg rounded-full hover:bg-gradient-to-r hover:from-red-400 hover:to-pink-100 hidden sm:inline-flex"
+              >
+                Log in
+              </button>
+              <div className="flex sm:hidden items-center space-x-10">
+                <button
+                  onClick={redirectToLoginPage}
+                  className="bg-gradient-to-r from-red-500 to-pink-200 text-black font-bold px-8 py-2 text-lg rounded-full hover:bg-gradient-to-r hover:from-red-400 hover:to-pink-100"
+                >
                   Log in
                 </button>
-              </Link>
-              <div className="flex sm:hidden items-center space-x-10">
-                <Link href="/login">
-                  <button className="bg-gradient-to-r from-red-500 to-pink-200 text-black font-bold px-8 py-2 text-lg rounded-full hover:bg-gradient-to-r hover:from-red-400 hover:to-pink-100">
-                    Log in
-                  </button>
-                </Link>
                 <button
                   onClick={toggleMobileMenu}
                   className="text-black text-3xl hover:text-red-500"
@@ -198,9 +194,9 @@ export default function Home() {
                 <hr className="border-gray-300 mb-6" />
                 <ul className="space-y-6 text-black text-xl">
                   <li>
-                    <Link href="/learn" legacyBehavior>
+                    <Link href="/Tech" legacyBehavior>
                       <p className="hover:text-red-500 hover:underline cursor-pointer">
-                        Learn
+                        Technology Used
                       </p>
                     </Link>
                   </li>
@@ -242,331 +238,114 @@ export default function Home() {
             >
               Welcome to Pairmony
             </h1>
-            <Link href="/signup">
-              <button
-                style={{ opacity: opacity }}
-                className="bg-gradient-to-r from-red-600 to-pink-600 text-white px-6 md:px-16 py-3 text-sm md:text-xl rounded-full font-bold hover:bg-gradient-to-r hover:from-red-500 hover:to-pink-500"
-              >
-                Get Started
-              </button>
-            </Link>
+            <button
+              style={{ opacity: opacity }}
+              className="bg-gradient-to-r from-red-600 to-pink-600 text-white px-6 md:px-16 py-3 text-sm md:text-xl rounded-full font-bold hover:bg-gradient-to-r hover:from-red-500 hover:to-pink-500"
+              onClick={redirectToSignupPage}
+            >
+              Get Started
+            </button>
           </div>
         </div>
 
-        <div className="relative h-screen">
-          {/* Technology Used Section */}
-          <section className="bg-black text-white py-20 px-10">
-            <div className="container mx-auto px-4">
-              <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold text-center mb-8">
-                Technology Used
-              </h2>
-              <p className="text-center text-xl mb-12">
-                We use cutting-edge technologies to provide a seamless and
-                high-quality user experience.
+        <section className="">
+          {/* First section */}
+          <div className="flex flex-col md:flex-row items-center justify-center h-screen w-screen bg-blue-200">
+            <div className="w-full text-center">
+              <h2 className="text-5xl font-semibold">What is Pairmony?</h2>
+              <p className="mt-4 text-2xl">
+                Pairmony is a groundbreaking dating platform designed to help
+                individuals find their perfect match. Our platform uses advanced
+                AI algorithms to analyze user preferences and connect them with
+                potential partners based on compatibility.
               </p>
             </div>
-
-            {/* Frontend */}
-            <h3 className="text-3xl sm:text-5xl md:text-7xl font-semibold text-center mb-8">
-              Frontend
-            </h3>
-            <div className="grid grid-cols-1 md:space-y-16 md:mb-12 pb-4">
-              {/* Next.js */}
-              <div
-                ref={nextjsRef}
-                className={` flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  nextjsVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/nextjs.png"
-                  alt="Next.js"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Next.js
-                  </h4>
-                  <p className="text-xl">
-                    A modern React framework for building fast, scalable web
-                    applications.
-                  </p>
-                </div>
-              </div>
-
-              {/* Tailwind CSS */}
-              <div
-                ref={tailwindcssRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  tailwindcssVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/tailwindcss.png"
-                  alt="Tailwind CSS"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Tailwind CSS
-                  </h4>
-                  <p className="text-xl">
-                    A utility-first CSS framework for rapid UI development.
-                  </p>
-                </div>
-              </div>
+            <div className="w-full">
+              <Image
+                src="/images/coffee.png"
+                alt="What is Pairmony?"
+                width={400}
+                height={400}
+              />
             </div>
+          </div>
 
-            {/* Backend */}
-            <h3 className="text-3xl sm:text-5xl md:text-7xl font-semibold text-center mb-8">
-              Backend
-            </h3>
-            <div className="grid grid-cols-1 md:space-y-16 md:mb-12">
-              {/* Vercel */}
-              <div
-                ref={vercelRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  vercelVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/vercel.png"
-                  alt="Vercel"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Vercel
-                  </h4>
-                  <p className="text-xl">
-                    A cloud platform for static sites and Serverless Functions.
-                  </p>
-                </div>
-              </div>
-              {/* Supabase */}
-              <div
-                ref={supabaseRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  supabaseVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/supabase.png"
-                  alt="Supabase"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Supabase
-                  </h4>
-                  <p className="text-xl">
-                    An open-source Firebase alternative, providing real-time
-                    databases and authentication.
-                  </p>
-                </div>
-              </div>
-              <div
-                ref={weviateRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  weviateVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/weviate.jpeg"
-                  alt="Supabase"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Weviate
-                  </h4>
-                  <p className="text-xl">
-                    weviate is a vector database that stores and indexes data in
-                    a vector space. It is a high-performance, scalable, and
-                    open-source database that can be used as a replacement for
-                    traditional databases.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                ref={herokuRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  herokuVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/heroku.png"
-                  alt="Supabase"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Heroku
-                  </h4>
-                  <p className="text-xl">
-                    A cloud platform for static sites and Serverless Functions.
-                    Saas platform for hosting web apps.
-                  </p>
-                </div>
-              </div>
+          {/* Second section */}
+          <div className="flex flex-col md:flex-row items-center justify-center h-screen w-screen bg-green-200">
+            <div className="w-full text-center">
+              <h2 className="text-5xl font-semibold">
+                What does Pairmony mean?
+              </h2>
+              <p className="mt-4 text-2xl">
+                Pairmony is a combination of the words pair and harmony,
+                signifying our mission to create harmonious connections between
+                individuals. Our goal is to help users find meaningful
+                relationships through our innovative platform.
+              </p>
             </div>
-
-            {/* Databases */}
-            <h3 className="text-3xl sm:text-5xl md:text-7xl font-semibold text-center mb-8">
-              Databases
-            </h3>
-            <div className="grid grid-cols-1 md:space-y-16 md:mb-12">
-              {/* PostgreSQL */}
-              <div
-                ref={PostgreSQLRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  PostgresSQLVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/postgres.png"
-                  alt="PostgreSQL"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    PostgreSQL
-                  </h4>
-                  <p className="text-xl">
-                    A powerful, enterprise-class open-source database system.
-                  </p>
-                </div>
-              </div>
-
-              {/* i2v-neural-1 AI */}
-              <div
-                ref={imageRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  imageVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/image.png"
-                  alt="i2v-neural-1 AI"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    i2v-neural-1 AI
-                  </h4>
-                  <p className="text-xl">
-                    A cutting-edge AI technology for image processing and
-                    analysis.
-                  </p>
-                </div>
-              </div>
-
-              {/* context-1 AI */}
-              <div
-                ref={textRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  textVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/text.png"
-                  alt="context-1 AI"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    context-1 AI
-                  </h4>
-                  <p className="text-xl">
-                    An advanced AI technology for natural language processing
-                    and understanding.
-                  </p>
-                </div>
-              </div>
+            <div className="w-full">
+              <Image
+                src="/images/coffee.png"
+                alt="What does Pairmony mean?"
+                width={400}
+                height={400}
+              />
             </div>
+          </div>
 
-            {/* Other */}
-            <h3 className="text-3xl sm:text-5xl md:text-7xl font-semibold text-center mb-8">
-              Other
-            </h3>
-            <div className="grid grid-cols-1 md:space-y-16">
-              {/* Version Control: GitHub */}
-              <div
-                ref={GitHubRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  GitHubVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/github.png"
-                  alt="GitHub"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    GitHub
-                  </h4>
-                  <p className="text-xl">
-                    A web-based hosting service for version control using Git.
-                  </p>
-                </div>
-              </div>
-
-              {/* In-App Purchase: Buy Me a Coffee API */}
-              <div
-                ref={CoffeeRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  CoffeeVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/coffee.png"
-                  alt="Buy Me a Coffee API"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Buy Me a Coffee
-                  </h4>
-                  <p className="text-xl">
-                    A simple and easy-to-use API for accepting support and
-                    donations.
-                  </p>
-                </div>
-              </div>
-
-              {/* Authentication: Supabase Auth */}
-              <div
-                ref={authRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  authVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/auth.png"
-                  alt="Supabase Auth"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Supabase Auth
-                  </h4>
-                  <p className="text-xl">
-                    A robust and secure authentication system that integrates
-                    seamlessly with your applications.
-                  </p>
-                </div>
-              </div>
+          {/* Third section */}
+          <div className="flex flex-col md:flex-row items-center justify-center h-screen w-screen bg-yellow-200">
+            <div className="w-full text-center">
+              <h2 className="text-5xl font-semibold">How Pairmony works</h2>
+              <p className="mt-4 text-2xl">
+                Pairmony uses a simple yet effective process to help users find
+                their ideal match. Users create a profile, answer a series of
+                questions about their preferences, and our AI algorithms analyze
+                this information to suggest compatible partners.
+              </p>
             </div>
-          </section>
+            <div className="w-full">
+              <Image
+                src="/images/coffee.png"
+                alt="How Pairmony works"
+                width={400}
+                height={400}
+              />
+            </div>
+          </div>
 
-          <Footer />
-        </div>
-        <main className="p-10">
-          <h1 className="text-4xl font-bold">Welcome to My Website!</h1>
-        </main>
+          {/* Fourth section */}
+          <div className="flex flex-col md:flex-row items-center justify-center h-screen w-screen bg-purple-200">
+            <div className="w-full text-center">
+              <h2 className="text-5xl font-semibold">
+                Our advanced AI algorithms
+              </h2>
+              <p className="mt-4 text-2xl">
+                Pairmony has cutting-edge AI algorithms go beyond simple
+                matchmaking. We use deep learning and natural language
+                processing to understand user preferences and identify potential
+                partners who share similar values, interests, and goals.
+              </p>
+            </div>
+            <div className="w-full">
+              <Image
+                src="/images/coffee.png"
+                alt="Our advanced AI algorithms"
+                width={400}
+                height={400}
+              />
+            </div>
+          </div>
+        </section>
+
+        <Footer />
+
+       
       </div>
     </div>
   )
-}
+})
+
+export default Home
+
+

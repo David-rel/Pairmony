@@ -7,6 +7,12 @@ import Image from 'next/image'
 import Footer from '../../components/footer'
 import Navbar from '../../components/navbar'
 import Link from 'next/link'
+import {
+  useLogoutFunction,
+  useRedirectFunctions,
+  withAuthInfo,
+} from '@propelauth/react'
+import { useRouter } from 'next/router'
 
 const hobbies = [
   {
@@ -73,7 +79,22 @@ const skills = [
   { name: 'Lang Chain', percentage: 30 },
 ]
 
-function About() {
+
+
+const About = withAuthInfo((props) => {
+
+    const { redirectToLoginPage, redirectToSignupPage, redirectToAccountPage } =
+    useRedirectFunctions()
+  const logoutFunction = useLogoutFunction()
+
+  const router = useRouter()
+
+
+     if (props.isLoggedIn) {
+       router.push('app')
+     }
+
+
   return (
     <div className="">
       <div className="pt">
@@ -173,7 +194,7 @@ function About() {
       <Footer />
     </div>
   )
-}
+})
 
 export default About
 

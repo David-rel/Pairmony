@@ -3,13 +3,30 @@ import Image from 'next/image'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import Link from 'next/link'
+import {
+  useLogoutFunction,
+  useRedirectFunctions,
+  withAuthInfo,
+} from '@propelauth/react'
+import { useRouter } from 'next/router'
 
-
-const Support = () => {
+const Support  = withAuthInfo((props) => {
   const [full_name, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [message, setMessage] = useState('')
+
+    const { redirectToLoginPage, redirectToSignupPage, redirectToAccountPage } =
+      useRedirectFunctions()
+    const logoutFunction = useLogoutFunction()
+
+    const router = useRouter()
+
+    if (props.isLoggedIn) {
+      router.push('app')
+    }
+
+
 
   return (
     <>
@@ -297,6 +314,6 @@ const Support = () => {
       </div>
     </>
   )
-}
+})
 
 export default Support
