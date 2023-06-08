@@ -45,11 +45,8 @@ const Home = withAuthInfo((props) => {
   const tailwindcssRef = useRef(null)
   const vercelRef = useRef(null)
   const supabaseRef = useRef(null)
-  const herokuRef = useRef(null)
-  const weviateRef = useRef(null)
+  const cloudinaryRef = useRef(null)
   const PostgreSQLRef = useRef(null)
-  const imageRef = useRef(null)
-  const textRef = useRef(null)
   const GitHubRef = useRef(null)
   const CoffeeRef = useRef(null)
   const authRef = useRef(null)
@@ -59,14 +56,11 @@ const Home = withAuthInfo((props) => {
   const tailwindcssVisible = useIntersectionObserver(tailwindcssRef, {})
   const vercelVisible = useIntersectionObserver(vercelRef, {})
   const supabaseVisible = useIntersectionObserver(supabaseRef, {})
-  const herokuVisible = useIntersectionObserver(herokuRef, {})
+  const CloudinaryVisible = useIntersectionObserver(cloudinaryRef, {})
   const PostgresSQLVisible = useIntersectionObserver(PostgreSQLRef, {})
-  const imageVisible = useIntersectionObserver(imageRef, {})
-  const textVisible = useIntersectionObserver(textRef, {})
   const GitHubVisible = useIntersectionObserver(GitHubRef, {})
   const CoffeeVisible = useIntersectionObserver(CoffeeRef, {})
   const authVisible = useIntersectionObserver(authRef, {})
-  const weviateVisible = useIntersectionObserver(weviateRef, {})
 
 
      if (props.isLoggedIn) {
@@ -78,10 +72,9 @@ const Home = withAuthInfo((props) => {
 
   return (
     <div className="relative">
-        <Navbar />
-      
+      <Navbar />
+
       <div className="">
-        
         <div className="relative h-screen">
           {/* Technology Used Section */}
           <section className="bg-black text-white py-20 px-10">
@@ -180,62 +173,37 @@ const Home = withAuthInfo((props) => {
                 }`}
               >
                 <img
-                  src="/images/supabase.png"
+                  src="/images/fauna.png"
                   alt="Supabase"
                   className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
                 />
                 <div>
                   <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Supabase
+                    Fauna DB
                   </h4>
                   <p className="text-xl">
-                    An open-source Firebase alternative, providing real-time
-                    databases and authentication.
-                  </p>
-                </div>
-              </div>
-              <div
-                ref={weviateRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  weviateVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/weviate.jpeg"
-                  alt="Supabase"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Weviate
-                  </h4>
-                  <p className="text-xl">
-                    weviate is a vector database that stores and indexes data in
-                    a vector space. It is a high-performance, scalable, and
-                    open-source database that can be used as a replacement for
-                    traditional databases.
+                    A cloud platform for static sites and Serverless Functions.
                   </p>
                 </div>
               </div>
 
               <div
-                ref={herokuRef}
+                ref={cloudinaryRef}
                 className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  herokuVisible ? 'animate-slideFromLeft' : 'opacity-0'
+                  CloudinaryVisible ? 'animate-slideFromLeft' : 'opacity-0'
                 }`}
               >
                 <img
-                  src="/images/heroku.png"
+                  src="/images/cloudinary.jpeg"
                   alt="Supabase"
                   className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
                 />
                 <div>
                   <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    Heroku
+                    Cloudinary
                   </h4>
                   <p className="text-xl">
-                    A cloud platform for static sites and Serverless Functions.
-                    Saas platform for hosting web apps.
+                    A cloud platform for storing images and videos.
                   </p>
                 </div>
               </div>
@@ -254,62 +222,16 @@ const Home = withAuthInfo((props) => {
                 }`}
               >
                 <img
-                  src="/images/postgres.png"
+                  src="/images/bson.jpeg"
                   alt="PostgreSQL"
                   className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
                 />
                 <div>
                   <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    PostgreSQL
+                    BSON
                   </h4>
                   <p className="text-xl">
-                    A powerful, enterprise-class open-source database system.
-                  </p>
-                </div>
-              </div>
-
-              {/* i2v-neural-1 AI */}
-              <div
-                ref={imageRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  imageVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/image.png"
-                  alt="i2v-neural-1 AI"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    i2v-neural-1 AI
-                  </h4>
-                  <p className="text-xl">
-                    A cutting-edge AI technology for image processing and
-                    analysis.
-                  </p>
-                </div>
-              </div>
-
-              {/* context-1 AI */}
-              <div
-                ref={textRef}
-                className={`flex flex-col items-center md:flex-row md:items-center border-2 border-white p-4 rounded-lg ${
-                  textVisible ? 'animate-slideFromLeft' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src="/images/text.png"
-                  alt="context-1 AI"
-                  className="h-32 w-auto mb-4 md:h-48 md:w-auto md:mx-4"
-                />
-                <div>
-                  <h4 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-2">
-                    context-1 AI
-                  </h4>
-                  <p className="text-xl">
-                    An advanced AI technology for natural language processing
-                    and understanding.
+                    A document-oriented database program.
                   </p>
                 </div>
               </div>
@@ -392,7 +314,6 @@ const Home = withAuthInfo((props) => {
 
           <Footer />
         </div>
-       
       </div>
     </div>
   )

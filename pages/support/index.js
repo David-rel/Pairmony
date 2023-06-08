@@ -10,23 +10,21 @@ import {
 } from '@propelauth/react'
 import { useRouter } from 'next/router'
 
-const Support  = withAuthInfo((props) => {
+const Support = withAuthInfo((props) => {
   const [full_name, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [message, setMessage] = useState('')
 
-    const { redirectToLoginPage, redirectToSignupPage, redirectToAccountPage } =
-      useRedirectFunctions()
-    const logoutFunction = useLogoutFunction()
+  const { redirectToLoginPage, redirectToSignupPage, redirectToAccountPage } =
+    useRedirectFunctions()
+  const logoutFunction = useLogoutFunction()
 
-    const router = useRouter()
+  const router = useRouter()
 
-    if (props.isLoggedIn) {
-      router.push('app')
-    }
-
-
+  if (props.isLoggedIn) {
+    router.push('app')
+  }
 
   return (
     <>

@@ -1,31 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react'
-import useIntersectionObserver from '../utils/useIntersectionObserver'
 import Link from 'next/link'
 import Footer from '../components/footer'
 import 'tailwindcss/tailwind.css'
-import {
-  useLogoutFunction,
-  useRedirectFunctions,
-  withAuthInfo,
-} from '@propelauth/react'
+import { useRedirectFunctions, withAuthInfo } from '@propelauth/react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-
+import UploadWidget from '@/components/UploadWidget'
+import { CloudinaryContext } from 'cloudinary-react'
+import { Image as CloudinaryImage } from 'cloudinary-react'
 
 const Home = withAuthInfo((props) => {
-    const { redirectToLoginPage, redirectToSignupPage, redirectToAccountPage } =
-      useRedirectFunctions()
-    const logoutFunction = useLogoutFunction()
+  const { redirectToLoginPage, redirectToSignupPage } = useRedirectFunctions()
 
-    const router = useRouter()
+  const router = useRouter()
 
-    if(props.isLoggedIn) {
-      router.push('app')
-    }
+  if (props.isLoggedIn) {
+    router.push('app')
+  }
+
+  const [uploadedImagePublicId, setUploadedImagePublicId] = useState(null)
 
   //cool scroll fade away
 
-  
   const [opacity, setOpacity] = useState(1)
 
   const handleScroll = () => {
@@ -43,8 +39,6 @@ const Home = withAuthInfo((props) => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
-
-
 
   //dynamic navigation system
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -160,18 +154,18 @@ const Home = withAuthInfo((props) => {
                 onClick={redirectToLoginPage}
                 className="bg-gradient-to-r from-red-500 to-pink-200 text-black font-bold px-8 py-2 text-lg rounded-full hover:bg-gradient-to-r hover:from-red-400 hover:to-pink-100 hidden sm:inline-flex"
               >
-                Log in
+                Login
               </button>
-              <div className="flex sm:hidden items-center space-x-10">
+              <div className="flex sm:hidden items-center space-x-10 pl-4">
                 <button
                   onClick={redirectToLoginPage}
-                  className="bg-gradient-to-r from-red-500 to-pink-200 text-black font-bold px-8 py-2 text-lg rounded-full hover:bg-gradient-to-r hover:from-red-400 hover:to-pink-100"
+                  className="bg-gradient-to-r from-red-500 to-pink-200 text-black font-bold px-6 py-2 text-lg rounded-full hover:bg-gradient-to-r hover:from-red-400 hover:to-pink-100"
                 >
-                  Log in
+                  Login
                 </button>
                 <button
                   onClick={toggleMobileMenu}
-                  className="text-black text-3xl hover:text-red-500"
+                  className="text-black text-xl hover:text-red-500"
                 >
                   ☰
                 </button>
@@ -338,14 +332,32 @@ const Home = withAuthInfo((props) => {
           </div>
         </section>
 
-        <Footer />
+        {uploadedImagePublicId && (
+          <CloudinaryContext cloudName="dyxkxy28a">
+            <CloudinaryImage publicId={uploadedImagePublicId} />
+          </CloudinaryContext>
+        )}
 
-       
+        <UploadWidget
+          onUpload={(error, result) => {
+            if (result.event === 'success') {
+              setUploadedImagePublicId(result.info.public_id)
+            }
+          }}
+        >
+          {({ open }) => {
+            function handleOnClick(e) {
+              e.preventDefault()
+              open()
+            }
+            return <button onClick={handleOnClick}>Upload an Image</button>
+          }}
+        </UploadWidget>
+
+        <Footer />
       </div>
     </div>
   )
 })
 
 export default Home
-
-
